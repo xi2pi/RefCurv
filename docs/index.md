@@ -1,5 +1,3 @@
-theme: jekyll-theme-slate
-
 # RefCurv
 
 <img align="right" src={{ site.baseurl }}/logo/refcurv_logo.png width=150px>
