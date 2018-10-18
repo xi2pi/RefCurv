@@ -9,7 +9,7 @@ RefCurv is a software providing methods to create pediatric reference curves fro
 Following figure shows example reference curves for Body Mass Index (BMI) over age:
 
 <p align="center">
-<img src=/readme/bmi_example.png width=400px>
+<img src=readme/bmi_example.png width=400px>
 </p>
 
 The curves are based on a dataset of healthy Dutch boys.
