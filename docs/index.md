@@ -1,15 +1,15 @@
 # RefCurv
 
-<img align="right" src="img/refcurv_logo.png" width=150px>
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-RefCurv is a software providing methods to create pediatric reference curves from data. The graphical user interface (GUI) is written in Python. RefCurv uses R and the [GAMLSS](https://en.wikipedia.org/wiki/Generalized_additive_model_for_location,_scale_and_shape) add-on package as the underlying statistical engine.
+RefCurv is a software providing methods to create pediatric reference curves from data. Furthermore, it comes with a big number of features to analyze reference curves. The graphical user interface (GUI) is written in Python. RefCurv uses R and the [GAMLSS](https://en.wikipedia.org/wiki/Generalized_additive_model_for_location,_scale_and_shape) add-on package as the underlying statistical engine.
 
 ## Example
 
 Following figure shows example reference curves for Body Mass Index (BMI) over age:
 
 <p align="center">
-<img src="img/bmi_example.png" class="inline" width=400px>
+<img src="https://xi2pi.github.io/RefCurv/img/bmi_example.png" class="inline" width=400px>
 </p>
 
 The curves are based on a dataset of healthy Dutch boys.
@@ -17,4 +17,4 @@ RefCurv was used to fit a model to the data points and depict it in form of perc
 
 ## Overview
 
-![RefCurv](/img/refcurv_0_4_0.png)
+![RefCurv](https://xi2pi.github.io/RefCurv/img/refcurv_0_4_0.png)
