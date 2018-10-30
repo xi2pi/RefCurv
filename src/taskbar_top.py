@@ -65,7 +65,7 @@ class Task_Bar(QtGui.QMainWindow):
         # Setting
         plotsettingButton = QtGui.QAction("&Plot Setting", self)
         plotsettingButton.setStatusTip('Plot Setting')
-        plotsettingButton.triggered.connect(mainWindow.open_PlotSetting)
+        #plotsettingButton.triggered.connect(mainWindow.open_PlotSetting)
         plotsettingButton.setEnabled(False)
         
         outlierssettingButton = QtGui.QAction("&Outliers Setting", self)

@@ -59,7 +59,7 @@ class MainWindow(QtGui.QMainWindow):
         self.SensitivityDialog = SensitvityAnalysis(self)
         
         self.modelComp = Model_Comparison(self)        
-        self.PlotSettingsDialog = PlotSettings(self)
+        #self.PlotSettingsDialog = PlotSettings(self)
         self.OutliersSettingsDialog = OutliersSettings(self)
         self.ZscoreCalculator = Zscore_calculator(self)
         self.ZPConverter = ZP_converter(self)
@@ -158,7 +158,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ModelSelectionCVdialog.setWindowTitle('RefCurv ' + rc_version + ' - Model Selection CV')
         self.SensitivityDialog.setWindowTitle('RefCurv ' + rc_version + ' - Sensitivity Analysis')
         self.OutliersSettingsDialog.setWindowTitle('RefCurv ' + rc_version + ' - Outlier Settings')
-        self.PlotSettingsDialog.setWindowTitle('RefCurv ' + rc_version + '- Plot Settings')
+        #self.PlotSettingsDialog.setWindowTitle('RefCurv ' + rc_version + '- Plot Settings')
         self.ZPConverter.setWindowTitle('RefCurv ' + rc_version + ' - Z-score/Percentile converter')
         self.ZscoreCalculator.setWindowTitle('RefCurv ' + rc_version + ' - Z-score calculator')
         self.modelComp.setWindowTitle('RefCurv ' + rc_version + ' - Model comparison')
@@ -371,8 +371,8 @@ class MainWindow(QtGui.QMainWindow):
     def open_ExData_Echo_2(self):
         self.load_example(self.program_path +"/example/test_data_Wolf.csv")
         
-    def open_PlotSetting(self):
-        self.PlotSettingsDialog.show()
+    #def open_PlotSetting(self):
+    #    self.PlotSettingsDialog.show()
     
     def open_OutliersSetting(self):
         self.OutliersSettingsDialog.show()
