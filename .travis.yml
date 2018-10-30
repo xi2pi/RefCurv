@@ -8,7 +8,7 @@ install:
     - pip intall pyqt4
     - pip install scipy
     - pip install guidata
- script: refcurv.py
+ script: /src/refcurv.py
   
 
 
