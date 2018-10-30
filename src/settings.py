@@ -8,7 +8,6 @@ from PyQt4.QtCore import QProcess
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-from guidata.configtools import get_icon
 
 import os
 
@@ -20,7 +19,7 @@ class PlotSettings(QtGui.QDialog):
         super(PlotSettings, self).__init__()
         self.createFormGroupBox()
         
-        self.setWindowIcon(get_icon(os.getcwd() +'/logo/refcurv_logo.png'))
+        self.setWindowIcon(QIcon(self.program_path +'/logo/refcurv_logo.png'))
         
         pal = QtGui.QPalette()
         role = QtGui.QPalette.Background
