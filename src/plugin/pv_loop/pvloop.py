@@ -32,7 +32,7 @@ import os
 #import scipy.optimize as optimization
 
 #import plugin.pv_loop.ode_solver as ode_solver
-from guidata.configtools import get_icon
+#from guidata.configtools import get_icon
 
  
 #-----------------------------------
@@ -49,7 +49,7 @@ class pvloop_window(QtGui.QMainWindow):
         #self.setWindowIcon(get_icon('python.png'))
         self.setWindowTitle("PV Loop Simulation")
         self.setWindowTitle('RefCurv 0.3.0 - PV Loop Simulation')
-        self.setWindowIcon(get_icon(os.getcwd() +'/logo/refcurv_logo.png'))
+        #self.setWindowIcon(get_icon(os.getcwd() +'/logo/refcurv_logo.png'))
         
         pal=QtGui.QPalette()
         role = QtGui.QPalette.Background
