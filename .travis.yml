@@ -2,12 +2,7 @@ language: python
 python:
     - 3.5
 install:
-    - pip install numpy
-    - pip install pandas
-    - pip install matplotlib
-    - pip intall pyqt4
-    - pip install scipy
-    - pip install guidata
+    - pip install numpy pandas matplotlib pyqt4 scipy guidata
  script: python /src/refcurv.py
   
 
