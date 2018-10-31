@@ -6,6 +6,7 @@
 from main_window import *
 import sys       
 
+
 if __name__ == "__main__":
     
     # create an application and an instance "MainWindow"    

@@ -34,6 +34,7 @@ class PlotSettings(QtGui.QDialog):
         mainLayout.addWidget(self.formGroupBox)
         mainLayout.addWidget(buttonBox)
         self.setLayout(mainLayout)
+	
 
  
     def createFormGroupBox(self):

@@ -35,7 +35,9 @@ install:
     - popd
     #- pip install -r requirements.txt
     - pip install numpy pandas matplotlib scipy
-script: nosetests --exe --with-coverage --cover-erase --cover-package= ./src/refcurv.py
+script: python ./src/_testing_refcurv.py
+
+#nosetests --exe --with-coverage --cover-erase --cover-package= ./src/refcurv.py
   
 
 
