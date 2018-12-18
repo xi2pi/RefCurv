@@ -49,11 +49,11 @@ class ModelSelectionBIC(QtGui.QMainWindow):
         layout = QtGui.QGridLayout()
        
         # Labels
-        self.MuRange = QtGui.QLabel("e.d.f. Mu range:")
+        self.MuRange = QtGui.QLabel("M_df range:")
         layout.addWidget(self.MuRange, 0, 0)  
-        self.SigmaRange = QtGui.QLabel("e.d.f. Sigma range:")
+        self.SigmaRange = QtGui.QLabel("S_df range:")
         layout.addWidget(self.SigmaRange, 1, 0) 
-        self.LambdaRange = QtGui.QLabel("e.d.f. Lambda range:")
+        self.LambdaRange = QtGui.QLabel("L_df range:")
         layout.addWidget(self.LambdaRange, 2, 0) 
         
         # TextField Min
