@@ -28,7 +28,7 @@ class ModelFitting(QtGui.QDialog):
         self.chosen_xAxis = "none"
         self.chosen_yAxis = "none"
         
-        self.command = 'Rscript'
+        self.command = self.program_path + '/R-3.3.2/bin/Rscript'
         
         # GUI
         self.createFormGroupBox()        

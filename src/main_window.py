@@ -47,6 +47,7 @@ class MainWindow(QtGui.QMainWindow):
         
         # set program path
         self.program_path = os.path.dirname(sys.argv[0])
+        print("Current location: " + self.program_path)
         
         # clear temp folder
         self.del_tmp()
@@ -671,7 +672,7 @@ class MainWindow(QtGui.QMainWindow):
         if self.filename:
             try:
                 self.current_data = pd.read_csv(self.filename,sep =',', encoding = "ISO-8859-1")
-                print(self.current_data)
+                #print(self.current_data)
                 self.file_flag = True
             except:
                 print("reading error - chosen data file")
@@ -682,7 +683,7 @@ class MainWindow(QtGui.QMainWindow):
         self.plotting_flag = False
         try:
             self.current_data = pd.read_csv(example_file,sep =',', encoding = "ISO-8859-1")
-            print(self.current_data)
+            #print(self.current_data)
             self.file_flag = True
             self.data = self.current_data
 
