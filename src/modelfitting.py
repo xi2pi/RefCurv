@@ -23,12 +23,13 @@ from helprefcurv import *
 class ModelFitting(QtGui.QDialog):    
     def __init__(self, mainWindow):
         super(ModelFitting, self).__init__() 
-        self.program_path = os.path.dirname(sys.argv[0])
-        
+        #self.program_path = os.path.dirname(sys.argv[0])
+        self.program_path = os.getcwd()
+
         self.chosen_xAxis = "none"
         self.chosen_yAxis = "none"
         
-        self.command = self.program_path + '/R-3.3.2/bin/Rscript'
+        self.command = 'Rscript'
         
         # GUI
         self.createFormGroupBox()        
@@ -115,6 +116,8 @@ class ModelFitting(QtGui.QDialog):
                 fileName = [self.program_path +"/tmp/cur_data.csv"]
                 config = [self.chosen_xAxis, self.chosen_yAxis, points_on, self.gamlss_model]
                 command_arg = [path2script] + args + fileName + config
+                print("-----------")
+                print(command_arg)
                 try:
                     self._process.start(self.command, command_arg, QtCore.QIODevice.ReadOnly)
                     print("R script: " + self.command)

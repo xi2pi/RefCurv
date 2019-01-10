@@ -1,17 +1,15 @@
 # perc_model_flexible.R
-
-# Fetch command line arguments
-myArgs <- commandArgs(trailingOnly = TRUE)
-
-# write logfile
-logfile <- file(paste(dirname(myArgs[4]),"/log_model_fitting.txt", sep=""),  open="wt")
-sink(logfile, type="message")
-
 # Load packages
+
+#zz <- file("/R_model/log_model_fitting.Rout", open="wt")
+#sink(zz, type="message")
 library(gamlss)
 library(pander)
 library(dplyr)
 library(tidyr)
+
+# Fetch command line arguments
+myArgs <- commandArgs(trailingOnly = TRUE)
 
 # Convert to numerics
 nums = as.numeric(myArgs[1:3])
@@ -80,6 +78,7 @@ centiles(m1,
          points = points_on)
 
 
+
 title(ylab = y_label, line=2.2)
 title(xlab = x_label, line=2.2)
 abline(h= seq(ylim1, ylim2, by=ysteps), v=seq(xlim1, xlim2, by=xsteps), col="gray", lty=3)
@@ -112,6 +111,5 @@ write.csv(chart, file = paste(dirname(myArgs[4]),"/percentiles_chart.csv", sep="
 
 res_chart <- data.frame(resid_m1)
 write.csv(res_chart, file = paste(dirname(myArgs[4]),"/res_chart.csv", sep=""))
-
-sink(type="message")
-close(logfile)
+#sink(type="message")
+#close(zz)

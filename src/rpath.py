@@ -23,7 +23,6 @@ class r_path(QtGui.QMainWindow):
 
     def __init__(self, mainWindow, modelFitter, modelselect, modelselectCV, sensiti, adfitting):
         super(r_path, self).__init__() 
-        self.program_path = mainWindow.program_path
         
         self.fitter = modelFitter
         self.modelselect = modelselect
@@ -60,16 +59,7 @@ class r_path(QtGui.QMainWindow):
         self.mainLayout.addWidget(self.formGroupBox)
         self.mainLayout.addWidget(self.widget_btns)
         
-        self.init_path()
-        
-    def init_path(self):
-        R_path = self.program_path + '/R-3.3.2/bin/Rscript'
-        self.fitter.command = R_path
-        self.modelselect.command = R_path
-        self.modelselectCV.command = R_path
-        self.adfitter.command = R_path
-        self.sensiti.command = R_path
-    
+
         
     def init_createFormGroupBox(self):
         self.formGroupBox = QtGui.QGroupBox("R Path")

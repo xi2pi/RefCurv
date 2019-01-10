@@ -1,0 +1,31 @@
+clone repository
+navigate to the location
+
+cd RefCurv/src
+
+%sudo apt install python3-pip
+%pip3 install -r requirements.txt
+
+
+sudo apt install python3-pandas
+sudo apt install python3-numpy
+sudo apt install python3-scipy
+sudo apt install python3-pyqt4
+sudo apt install python3-matplotlib
+
+#python 3.5.2
+#scipy 0.17.0
+#numpy 1.11.0
+#pandas 0.17.1
+#matplotlib 1.5.1
+
+#in R 3.4.4 (32-bit)
+# https://cran.r-project.org/bin/linux/ubuntu/
+#sudo apt install r-base-core -> installs old version
+
+install.packages("gamlss")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("pander")
+
+

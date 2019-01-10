@@ -46,8 +46,9 @@ class MainWindow(QtGui.QMainWindow):
         super(MainWindow, self).__init__(parent)
         
         # set program path
-        self.program_path = os.path.dirname(sys.argv[0])
-        print("Current location: " + self.program_path)
+        #self.program_path = os.path.dirname(sys.argv[0])
+        self.program_path = os.getcwd()
+        print(self.program_path) 
         
         # clear temp folder
         self.del_tmp()
@@ -367,10 +368,10 @@ class MainWindow(QtGui.QMainWindow):
         self.load_example(self.program_path +"/example/db.csv")
     
     def open_ExData_Echo(self):
-        self.load_example(self.program_path +"/example/test_data_Kristina.csv")
+        self.load_example(self.program_path +"/example/test_data_kristina.csv")
         
     def open_ExData_Echo_2(self):
-        self.load_example(self.program_path +"/example/test_data_Wolf.csv")
+        self.load_example(self.program_path +"/example/test_data_wolf.csv")
         
     #def open_PlotSetting(self):
     #    self.PlotSettingsDialog.show()
@@ -453,8 +454,8 @@ class MainWindow(QtGui.QMainWindow):
                 self.y_array.append(float(item.text(self.yCombo.currentIndex()+1)))
             
         # plot data
-        self.ax.plot(self.x_array, self.y_array, '.', color = "#1f77b4ff")
-        
+        #self.ax.plot(self.x_array, self.y_array, '.', color = "#1f77b4ff")
+        self.ax.plot(self.x_array, self.y_array, '.')
         # set figure limits
         x_array_diff = 0.05*(max(self.x_array) - min(self.x_array))
         y_array_diff = 0.05*(max(self.y_array) - min(self.y_array))
@@ -672,7 +673,7 @@ class MainWindow(QtGui.QMainWindow):
         if self.filename:
             try:
                 self.current_data = pd.read_csv(self.filename,sep =',', encoding = "ISO-8859-1")
-                #print(self.current_data)
+                print(self.current_data)
                 self.file_flag = True
             except:
                 print("reading error - chosen data file")
@@ -681,9 +682,10 @@ class MainWindow(QtGui.QMainWindow):
     def load_example(self, example_file):
         # loading example datasets
         self.plotting_flag = False
+        print(example_file)
         try:
-            self.current_data = pd.read_csv(example_file,sep =',', encoding = "ISO-8859-1")
-            #print(self.current_data)
+            self.current_data = pd.read_csv(example_file, sep =',', encoding = "ISO-8859-1")
+            print(self.current_data)
             self.file_flag = True
             self.data = self.current_data
 
