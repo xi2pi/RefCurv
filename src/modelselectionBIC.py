@@ -105,6 +105,7 @@ class ModelSelectionBIC(QtGui.QMainWindow):
     
         
     def run_optimization(self):
+        print(self.command)
                 
         self.table.clear()
         self.table.setSortingEnabled(False)
@@ -119,6 +120,7 @@ class ModelSelectionBIC(QtGui.QMainWindow):
         self.L_Max = int(self.LambdaTextMax.text()) + 1
         
         manager = TaskManager()
+        manager.command = self.command
         manager.x_axis = self.x_value
         manager.y_axis = self.y_value
         manager.start_process(self.M_Min,self.M_Max, self.S_Min,self.S_Max, self.L_Min,self.L_Max)
@@ -228,7 +230,7 @@ class TaskManager(QtCore.QObject):
             print("wait")
             
     def run_queue(self, command, command_arg_list):
-                    
+        print(command)
         self.length_queue = len(command_arg_list)
         print(self.length_queue)
         
@@ -238,7 +240,7 @@ class TaskManager(QtCore.QObject):
             print(self.process_id)
             process = QtCore.QProcess(self)
             process.readyReadStandardOutput.connect(partial(self.onReadyReadStandardOutput_queue, self.process_id, cur_process))
-            process.start(command,cur_process, QtCore.QIODevice.ReadOnly)
+            process.start(command, cur_process, QtCore.QIODevice.ReadOnly)
             self.m_processes.append(process)
             
         else:

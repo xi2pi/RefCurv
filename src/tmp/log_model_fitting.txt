@@ -30,5 +30,35 @@ The following objects are masked from 'package:base':
 
     intersect, setdiff, setequal, union
 
-Es gab 47 Warnungen (Anzeige mit warnings())
+Warnmeldungen:
+1: In additive.fit(x = X, y = wv, w = wt * w, s = s, who = who, smooth.frame,  :
+  additive.fit convergence not obtained in  30  iterations
+2: In additive.fit(x = X, y = wv, w = wt * w, s = s, who = who, smooth.frame,  :
+  additive.fit convergence not obtained in  30  iterations
+3: In additive.fit(x = X, y = wv, w = wt * w, s = s, who = who, smooth.frame,  :
+  additive.fit convergence not obtained in  30  iterations
+4: In additive.fit(x = X, y = wv, w = wt * w, s = s, who = who, smooth.frame,  :
+  additive.fit convergence not obtained in  30  iterations
+5: In additive.fit(x = X, y = wv, w = wt * w, s = s, who = who, smooth.frame,  :
+  additive.fit convergence not obtained in  30  iterations
+Warnmeldung:
+In predict.gamlss(obj, what = "mu", newdata = newx, type = "response",  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 
 Es gab 18 Warnungen (Anzeige mit warnings())
+Warnmeldung:
+In predict.gamlss(object, newdata = newdata, what = "mu", type = type,  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 
+Warnmeldung:
+In predict.gamlss(obj, what = "mu", newdata = newx, type = "response",  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 
+Warnmeldung:
+In predict.gamlss(obj, what = "mu", newdata = newx, type = "response",  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 
