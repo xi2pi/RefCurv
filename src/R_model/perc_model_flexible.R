@@ -9,9 +9,6 @@ sink(logfile, type="message")
 
 # Load packages
 library(gamlss)
-library(pander)
-library(dplyr)
-library(tidyr)
 
 # Convert to numerics
 nums = as.numeric(myArgs[1:3])

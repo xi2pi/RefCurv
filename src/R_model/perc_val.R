@@ -1,9 +1,6 @@
 # perc_val.R
 # Load packages
 library(gamlss)
-library(pander)
-library(dplyr)
-library(tidyr)
 
 # Fetch command line arguments
 myArgs <- commandArgs(trailingOnly = TRUE)
