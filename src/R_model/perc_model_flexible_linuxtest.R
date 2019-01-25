@@ -1,12 +1,10 @@
 # perc_model_flexible.R
-# Load packages
 
-#zz <- file("/R_model/log_model_fitting.Rout", open="wt")
-#sink(zz, type="message")
+zz <- file("/R_model/log_model_fitting.Rout", open="wt")
+sink(zz, type="message")
+
+# Load packages
 library(gamlss)
-library(pander)
-library(dplyr)
-library(tidyr)
 
 #Rscript '/home/chris/Desktop/refcurv_0.4.1_linux/src/R_model/perc_model_flexible.R'  
 #'1' '0', '0' '/home/chris/Desktop/refcurv_0.4.1_linux/src/tmp/cur_data.csv' 

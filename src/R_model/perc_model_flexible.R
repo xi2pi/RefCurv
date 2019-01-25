@@ -4,9 +4,7 @@
 #zz <- file("/R_model/log_model_fitting.Rout", open="wt")
 #sink(zz, type="message")
 library(gamlss)
-library(pander)
-library(dplyr)
-library(tidyr)
+
 
 # Fetch command line arguments
 myArgs <- commandArgs(trailingOnly = TRUE)
