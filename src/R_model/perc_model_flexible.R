@@ -1,13 +1,14 @@
 # perc_model_flexible.R
-# Load packages
-
-#zz <- file("/R_model/log_model_fitting.Rout", open="wt")
-#sink(zz, type="message")
-library(gamlss)
-
 
 # Fetch command line arguments
 myArgs <- commandArgs(trailingOnly = TRUE)
+
+# Log file
+logfile <- file(paste(dirname(myArgs[4]),"/log_model_fitting.txt", sep=""),  open="wt")
+sink(logfile, type="message")
+
+# Load packages
+library(gamlss)
 
 # Convert to numerics
 nums = as.numeric(myArgs[1:3])
@@ -109,5 +110,6 @@ write.csv(chart, file = paste(dirname(myArgs[4]),"/percentiles_chart.csv", sep="
 
 res_chart <- data.frame(resid_m1)
 write.csv(res_chart, file = paste(dirname(myArgs[4]),"/res_chart.csv", sep=""))
-#sink(type="message")
-#close(zz)
+
+sink(type="message")
+close(logfile)
