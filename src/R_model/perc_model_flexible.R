@@ -104,12 +104,18 @@ centile_values <- centiles.pred(m1, xname="x", xvalues=x_values, cent = c(3, 10,
 # residuals
 resid_m1 <- centiles.pred(m1, xname="x", xvalues=data_perc$x, yval=data_perc$y, type="z-scores")
 
+# LMS values
+lms_values_datapoints <- predictAll(m1, newdata=data.frame(x=data_perc$x))
+
 # saving
 chart <- data.frame(lms_values, centile_values)
 write.csv(chart, file = paste(dirname(myArgs[4]),"/percentiles_chart.csv", sep=""))
 
 res_chart <- data.frame(resid_m1)
 write.csv(res_chart, file = paste(dirname(myArgs[4]),"/res_chart.csv", sep=""))
+
+lms_values_datapoints_chart <- data.frame(lms_values_datapoints)
+write.csv(lms_values_datapoints_chart, file = paste(dirname(myArgs[4]),"/lms_datapoint_chart.csv", sep=""))
 
 sink(type="message")
 close(logfile)

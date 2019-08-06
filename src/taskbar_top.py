@@ -61,6 +61,11 @@ class Task_Bar(QtGui.QMainWindow):
         modelComparison = QtGui.QAction("&Model Comparison", self)
         modelComparison.setStatusTip('Model Comparison')
         modelComparison.triggered.connect(mainWindow.open_modelComp)
+
+        # Diagnosis        
+        diagnosis = QtGui.QAction("&Diagnosis", self)
+        diagnosis.setStatusTip('Diagnosis')
+        diagnosis.triggered.connect(mainWindow.open_diagnosis)
         
         # Setting
         plotsettingButton = QtGui.QAction("&Plot Setting", self)
@@ -136,6 +141,9 @@ class Task_Bar(QtGui.QMainWindow):
         modelMenu.addAction(admodelfittingButton)
         modelMenu.addAction(rv_computationButton)
         modelMenu.addAction(modelComparison)
+        # diagnosis
+        diagnosisMenu = mainMenu.addMenu('&Diagnosis')
+        diagnosisMenu.addAction(diagnosis)
         # calculator
         calculatorMenu = mainMenu.addMenu('&Calculator')
         calculatorMenu.addAction(zscoreButton)

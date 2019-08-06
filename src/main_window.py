@@ -37,6 +37,7 @@ from reverse_computation import *
 from taskbar_top import *
 from rpath import *
 from modelcomparison import *
+from diagnosis import *
 
 # PlugIn
 import plugin.pv_loop.pvloop as pvloop_plugin
@@ -51,7 +52,7 @@ class MainWindow(QtGui.QMainWindow):
         print(self.program_path) 
         
         # clear temp folder
-        self.del_tmp()
+        #self.del_tmp()
         
         ''' Modules '''
         # creating instances for each feature
@@ -68,6 +69,7 @@ class MainWindow(QtGui.QMainWindow):
         self.admodelFitter = AdModelFitting(self)
         self.mc_experiment = Monte_Carlo(self)
         self.rv_computation = Reverese_Comp(self)
+        self.diagnosis = Diagnosis(self)
         self.taskB = Task_Bar(self)
         self.aboutRefCurv = helprefcurv.AboutWindow()
         
@@ -168,6 +170,7 @@ class MainWindow(QtGui.QMainWindow):
         self.mc_experiment.setWindowTitle('RefCurv ' + rc_version + ' - Monte Carlo Experiment')
         self.rv_computation.setWindowTitle('RefCurv ' + rc_version + ' - Reverse Computation')
         self.pvloop_window.setWindowTitle('RefCurv ' + rc_version + ' - PV Loop Simulation')
+        self.diagnosis.setWindowTitle('RefCurv ' + rc_version + ' - Diagnosis tool')        
         
         self.aboutRefCurv.setWindowTitle('RefCurv ' + rc_version + ' - About')
         self.aboutRefCurv.set_version(rc_version)     
@@ -310,6 +313,10 @@ class MainWindow(QtGui.QMainWindow):
             # Show dialog
             self.admodelFitter.show()
             self.admodelFitter.activateWindow()
+            
+    def open_diagnosis(self):
+        self.diagnosis.plot_residuals()
+        self.diagnosis.show()
         
     def open_ZscoreCalc(self):
         self.ZscoreCalculator.show()
