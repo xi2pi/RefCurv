@@ -20,7 +20,9 @@ from scipy.stats import truncnorm
 from scipy.optimize import minimize
 import scipy.stats as st
 import sys
+import shutil
 
+from helprefcurv import *
 
 
 class Reverese_Comp(QtGui.QMainWindow):    
@@ -73,6 +75,8 @@ class Reverese_Comp(QtGui.QMainWindow):
 #        self.mainLayout.addWidget(self.formGroupBox)
         self.mainLayout.addWidget(self.widget_btns)
         
+        self.popUp = PopUpProcess(self)
+        
         # buttons
         loadRefButton = QtGui.QAction("&Load reference curves", self)
         loadRefButton.setStatusTip('Load reference curves')
@@ -82,11 +86,17 @@ class Reverese_Comp(QtGui.QMainWindow):
         loadCurRefButton.setStatusTip('Load current reference curves')
         loadCurRefButton.triggered.connect(self.open_loadCurRefcurves)
         
+        loadResultsButton = QtGui.QAction("&Save results", self)
+        loadResultsButton.setStatusTip('Save results')
+        loadResultsButton.triggered.connect(self.open_saveResultsDialog)
+        
         # menu        
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&Reference curves')
         fileMenu.addAction(loadRefButton)
         fileMenu.addAction(loadCurRefButton)
+        fileMenu.addSeparator()
+        fileMenu.addAction(loadResultsButton)
  
 
         
@@ -133,31 +143,47 @@ class Reverese_Comp(QtGui.QMainWindow):
 
     def reverse_comp(self):
         if self.lms_chart_exists == True:
-            M_array = []
-            L_array = []
-            S_array = []
-            y_0 = np.array([self.lms_chart[i].values[0] for i in ["C3", "C10", "C25", "C50", "C75", "C90", "C97"]])
-            para_start = [-0.4, y_0[3], 0.35]
-            for j in range(0, len(self.lms_chart["x"].values)):
-                x = self.lms_chart["x"].values[j]
-                y = np.array([self.lms_chart[i].values[j] for i in ["C3", "C10", "C25", "C50", "C75", "C90", "C97"]])
-                    
-                res = minimize(self.error_func, para_start, args = (y), method='nelder-mead') 
-                M_array.append(res.x[1])
-                L_array.append(res.x[0])
-                S_array.append(res.x[2])
-                para_start = [res.x[0], res.x[1], res.x[2]]
-            
-            self.ax_L = self.figure_LMS.add_subplot(311)
-            self.ax_M = self.figure_LMS.add_subplot(312)
-            self.ax_S = self.figure_LMS.add_subplot(313)
-            
-            self.ax_L.plot(self.lms_chart["x"].values, L_array, 'b')
-            self.ax_M.plot(self.lms_chart["x"].values, M_array, 'b')
-            self.ax_S.plot(self.lms_chart["x"].values, S_array, 'b')
-            
-            self.figure_LMS.tight_layout()
-            self.canvas_LMS.draw()
+            try:
+                
+                self.popUp.onStart()
+                self.popUp.show()
+                
+                M_array = []
+                L_array = []
+                S_array = []
+                y_0 = np.array([self.lms_chart[i].values[0] for i in ["C3", "C10", "C25", "C50", "C75", "C90", "C97"]])
+                para_start = [-0.4, y_0[3], 0.35]
+                for j in range(0, len(self.lms_chart["x"].values)):
+                    x = self.lms_chart["x"].values[j]
+                    y = np.array([self.lms_chart[i].values[j] for i in ["C3", "C10", "C25", "C50", "C75", "C90", "C97"]])
+                        
+                    res = minimize(self.error_func, para_start, args = (y), method='nelder-mead') 
+                    M_array.append(res.x[1])
+                    L_array.append(res.x[0])
+                    S_array.append(res.x[2])
+                    para_start = [res.x[0], res.x[1], res.x[2]]
+                
+                self.ax_L = self.figure_LMS.add_subplot(311)
+                self.ax_M = self.figure_LMS.add_subplot(312)
+                self.ax_S = self.figure_LMS.add_subplot(313)
+                
+                self.ax_L.plot(self.lms_chart["x"].values, L_array, 'b')
+                self.ax_M.plot(self.lms_chart["x"].values, M_array, 'b')
+                self.ax_S.plot(self.lms_chart["x"].values, S_array, 'b')
+                
+                self.figure_LMS.tight_layout()
+                self.canvas_LMS.draw()
+                
+                self.popUp.onFinished()
+                self.popUp.close()
+                
+                self.lms_chart["mu"] = pd.DataFrame(M_array)
+                self.lms_chart["sigma"] = pd.DataFrame(S_array)
+                self.lms_chart["nu"] = pd.DataFrame(L_array)
+                
+                self.lms_chart.to_csv(self.program_path + "/tmp/results_reverse.csv", sep = ',', encoding = "ISO-8859-1", index = False)
+            except:
+                print("computation error")
         else:
             print("no charts")
             
@@ -187,6 +213,18 @@ class Reverese_Comp(QtGui.QMainWindow):
                 print("reading error")
         else:
             print("no charts")
+            
+    # Save results dialog
+    def open_saveResultsDialog(self):
+        if os.path.isfile(self.program_path +"/tmp/results_reverse.csv"):
+            try:
+                filename_chart = QtGui.QFileDialog.getSaveFileName(self,'Save File', ' ','*.csv')
+                if filename_chart:
+                    shutil.copy2(self.program_path +"/tmp/results_reverse.csv", filename_chart)
+            except:
+                print("copy error")
+        else:
+            print("no reference curves")
 
             
     def plot_refcurv(self):

@@ -18,6 +18,30 @@ import sys
 
 from scipy import interpolate
 
+class PandasModel(QtCore.QAbstractTableModel):
+    """
+    Class to populate a table view with a pandas dataframe
+    """
+    def __init__(self, data, parent=None):
+        QtCore.QAbstractTableModel.__init__(self, parent)
+        self._data = data
+
+    def rowCount(self, parent=None):
+        return len(self._data.values)
+
+    def columnCount(self, parent=None):
+        return self._data.columns.size
+
+    def data(self, index, role=QtCore.Qt.DisplayRole):
+        if index.isValid():
+            if role == QtCore.Qt.DisplayRole:
+                return str(self._data.values[index.row()][index.column()])
+        return None
+
+    def headerData(self, col, orientation, role):
+        if orientation == QtCore.Qt.Horizontal and role == QtCore.Qt.DisplayRole:
+            return self._data.columns[col]
+        return None
 
 class Zscore_calculator(QtGui.QMainWindow):    
     def __init__(self, mainWindow):
@@ -25,6 +49,7 @@ class Zscore_calculator(QtGui.QMainWindow):
         self.program_path = os.path.dirname(sys.argv[0])
         
         self.filename = ""
+        self.filenamePat = ""
         
         self.mainWidget = QtGui.QWidget(self)
         self.setCentralWidget(self.mainWidget)
@@ -50,8 +75,10 @@ class Zscore_calculator(QtGui.QMainWindow):
         
 #        okButton = QtGui.QPushButton("Ok")
 #        okButton.clicked.connect(self.calc_zscore)
+        self.tableWidget = QtGui.QTableView()
         
-        self.hLayout.addWidget(self.canvas)  
+        self.hLayout.addWidget(self.canvas) 
+        self.hLayout.addWidget(self.tableWidget) 
         self.nav = NavigationToolbar(self.canvas, self.canvas, coordinates=False)
         #self.buttonBox = QtGui.QDialogButtonBox(okButton | QtGui.QDialogButtonBox.Cancel)
         self.widget_btns = QtGui.QDialogButtonBox()
@@ -73,11 +100,23 @@ class Zscore_calculator(QtGui.QMainWindow):
         loadCurRefButton.setStatusTip('Load current reference curves')
         loadCurRefButton.triggered.connect(self.open_loadCurRefcurves)
         
+        loadPatientDataButton = QtGui.QAction("&Load patient data", self)
+        loadPatientDataButton.setStatusTip('Load patient data')
+        loadPatientDataButton.triggered.connect(self.open_loadPatientData)
+        
+        loadPatientCompButton = QtGui.QAction("&Compute z-scores", self)
+        loadPatientCompButton.setStatusTip('&Compute z-scores')
+        loadPatientCompButton.triggered.connect(self.open_loadPatientComp)
+        
         # menu        
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&Reference curves')
         fileMenu.addAction(loadRefButton)
         fileMenu.addAction(loadCurRefButton)
+        
+        fileMenuPat = mainMenu.addMenu('&Patient data')
+        fileMenuPat.addAction(loadPatientDataButton)
+        fileMenuPat.addAction(loadPatientCompButton)
  
         
     def init_createFormGroupBox(self):
@@ -110,32 +149,34 @@ class Zscore_calculator(QtGui.QMainWindow):
         
     def calc_zscore(self):
         if self.filename:
-            self.lms_chart = pd.read_csv(self.filename ,sep =',', encoding = "ISO-8859-1")
-            x = self.lms_chart["x"].values
-            y = float(self.x_entry.text())
-            M_array = self.lms_chart["mu"].values
-            S_array = self.lms_chart["sigma"].values
-            L_array = self.lms_chart["nu"].values
-            
-            f_M = interpolate.interp1d(x, M_array,  kind = "linear")
-            f_S = interpolate.interp1d(x, S_array,  kind = "linear")
-            f_L = interpolate.interp1d(x, L_array,  kind = "linear")
-            
-            #idx = (np.abs(x - float(self.x_entry.text()))).argmin()
-            #print(idx)
-            #z = self.z_score(L_array[idx], M_array[idx], S_array[idx], float(self.y_entry.text()))
-            #print(z)
-            z = self.z_score(f_L(y), f_M(y), f_S(y), float(self.y_entry.text()))
+            try:
+                self.lms_chart = pd.read_csv(self.filename ,sep =',', encoding = "ISO-8859-1")
+                x = self.lms_chart["x"].values
+                y = float(self.x_entry.text())
+                M_array = self.lms_chart["mu"].values
+                S_array = self.lms_chart["sigma"].values
+                L_array = self.lms_chart["nu"].values
                 
-            self.plot_refcurv()
-            self.ax_perc.annotate(
-                "Z-score\n"+ str(round(z, 4)),
-                xy=(float(self.x_entry.text()), float(self.y_entry.text())), xytext=(-15, 15),
-                textcoords='offset points', ha='right', va='bottom',
-                bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=1),
-                arrowprops=dict(arrowstyle = '->', connectionstyle='arc3,rad=0'))
-            self.ax_perc.plot(float(self.x_entry.text()), float(self.y_entry.text()),  color="r", marker="o", markersize = 5) 
-            self.canvas.draw()
+                self.f_M = interpolate.interp1d(x, M_array,  kind = "linear")
+                self.f_S = interpolate.interp1d(x, S_array,  kind = "linear")
+                self.f_L = interpolate.interp1d(x, L_array,  kind = "linear")
+                
+                #idx = (np.abs(x - float(self.x_entry.text()))).argmin()
+                #print(idx)
+                #z = self.z_score(L_array[idx], M_array[idx], S_array[idx], float(self.y_entry.text()))
+                #print(z)
+                z = self.z_score(self.f_L(y), self.f_M(y), self.f_S(y), float(self.y_entry.text()))
+                    
+                self.plot_refcurv()
+                self.ax_perc.annotate(
+                    "Z-score\n"+ str(round(z, 4)),
+                    xy=(float(self.x_entry.text()), float(self.y_entry.text())), xytext=(-15, 15),
+                    textcoords='offset points', ha='right', va='bottom',
+                    bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=1),
+                    arrowprops=dict(arrowstyle = '->', connectionstyle='arc3,rad=0'))
+                self.ax_perc.plot(float(self.x_entry.text()), float(self.y_entry.text()),  color="r", marker="o", markersize = 5) 
+                self.canvas.draw()
+            except Exception as e: print(e)
         else:
             print("not data loaded")
         
@@ -163,6 +204,44 @@ class Zscore_calculator(QtGui.QMainWindow):
                 print("reading error")
         else:
             print("no charts")
+            
+    def open_loadPatientData(self):
+        self.filenamePat = QtGui.QFileDialog.getOpenFileName(self,'Open File', ' ','*.csv')
+        if self.filenamePat:
+            try:
+                self.df = pd.read_csv(self.filenamePat,sep =',', encoding = "ISO-8859-1")
+                model = PandasModel(self.df)
+                self.tableWidget.setModel(model)
+                
+                self.plot_refcurv()
+                self.ax_perc.plot(self.df["x"].values, self.df["y"].values,  color="r", marker="o", linestyle='None', markersize = 5) 
+                self.canvas.draw()
+            except:
+                print("reading error")
+                
+    def open_loadPatientComp(self):
+        if self.filenamePat and self.filename:
+            try:
+                x = self.lms_chart["x"].values
+                y = float(self.x_entry.text())
+                M_array = self.lms_chart["mu"].values
+                S_array = self.lms_chart["sigma"].values
+                L_array = self.lms_chart["nu"].values
+                
+                self.f_M = interpolate.interp1d(x, M_array,  kind = "linear")
+                self.f_S = interpolate.interp1d(x, S_array,  kind = "linear")
+                self.f_L = interpolate.interp1d(x, L_array,  kind = "linear")
+                z_scores = [self.z_score(self.f_L(self.df["x"].values[i]), self.f_M(self.df["x"].values[i]), self.f_S(self.df["x"].values[i]), self.df["y"].values[i]) for i in range(0, len(self.df["x"].values))]
+    #            print(z_scores)
+                self.df["z-score"] =  pd.DataFrame(z_scores)           
+    #            
+                model = PandasModel(self.df)
+                self.tableWidget.setModel(model)
+    
+            except Exception as e: print(e)
+        else:
+            print("no data")
+
 
             
     def plot_refcurv(self):

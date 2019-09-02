@@ -9,28 +9,30 @@ Loading required package: parallel
 For more on GAMLSS look at http://www.gamlss.org/
 Type gamlssNews() to see new features/changes/bug fixes.
 
-Warning messages:
-1: In gamlss.pb(data[["pb(x, df = median_df)"]], z, w) :
-  the target df's are not acheived, try to reduce the no. of knot intervals 
- in pb(). eg. inter=10
-2: In gamlss.pb(data[["pb(x, df = median_df)"]], z, w) :
-  the target df's are not acheived, try to reduce the no. of knot intervals 
- in pb(). eg. inter=10
-3: In additive.fit(x = X, y = wv, w = wt * w, s = s, who = who, smooth.frame,  :
-  additive.fit convergence not obtained in  30  iterations
-4: In gamlss.pb(data[["pb(x, df = median_df)"]], z, w) :
-  the target df's are not acheived, try to reduce the no. of knot intervals 
- in pb(). eg. inter=10
-5: In gamlss.pb(data[["pb(x, df = median_df)"]], z, w) :
-  the target df's are not acheived, try to reduce the no. of knot intervals 
- in pb(). eg. inter=10
-6: In gamlss.pb(data[["pb(x, df = median_df)"]], z, w) :
-  the target df's are not acheived, try to reduce the no. of knot intervals 
- in pb(). eg. inter=10
-7: In gamlss.pb(data[["pb(x, df = median_df)"]], z, w) :
-  the target df's are not acheived, try to reduce the no. of knot intervals 
- in pb(). eg. inter=10
-8: In gamlss.pb(data[["pb(x, df = median_df)"]], z, w) :
-  the target df's are not acheived, try to reduce the no. of knot intervals 
- in pb(). eg. inter=10
+There were 50 or more warnings (use warnings() to see the first 50)
+Warning message:
+In predict.gamlss(obj, what = "mu", newdata = newx, type = "response",  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 
 There were 18 warnings (use warnings() to see them)
+Warning message:
+In predict.gamlss(object, newdata = newdata, what = "mu", type = type,  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 
+Warning message:
+In predict.gamlss(obj, what = "mu", newdata = newx, type = "response",  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 
+Warning message:
+In predict.gamlss(obj, what = "mu", newdata = newx, type = "response",  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 
+Warning message:
+In predict.gamlss(object, newdata = newdata, what = "mu", type = type,  :
+  There is a discrepancy  between the original and the re-fit 
+ used to achieve 'safe' predictions 
+ 

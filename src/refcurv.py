@@ -13,8 +13,8 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     RefCurv_MainWindow = MainWindow()
     # define the version
-    RefCurv_MainWindow.refcurv_version("0.4.3 - Linux")
-    RefCurv_MainWindow.setWindowTitle("RefCurv 0.4.3 - Linux")
+    RefCurv_MainWindow.refcurv_version("0.4.4 - Linux")
+    RefCurv_MainWindow.setWindowTitle("RefCurv 0.4.4 - Linux")
     RefCurv_MainWindow.show()
     sys.exit(app.exec_())
         
