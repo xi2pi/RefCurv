@@ -104,9 +104,13 @@ class Zscore_calculator(QtGui.QMainWindow):
         loadPatientDataButton.setStatusTip('Load patient data')
         loadPatientDataButton.triggered.connect(self.open_loadPatientData)
         
-        loadPatientCompButton = QtGui.QAction("&Compute z-scores", self)
-        loadPatientCompButton.setStatusTip('&Compute z-scores')
-        loadPatientCompButton.triggered.connect(self.open_loadPatientComp)
+        PatientCompButton = QtGui.QAction("&Compute z-scores", self)
+        PatientCompButton.setStatusTip('&Compute z-scores')
+        PatientCompButton.triggered.connect(self.open_loadPatientComp)
+        
+        PatientSaveButton = QtGui.QAction("&Save z-scores", self)
+        PatientSaveButton.setStatusTip('&Save z-scores')
+        PatientSaveButton.triggered.connect(self.open_saveZscores)
         
         # menu        
         mainMenu = self.menuBar()
@@ -116,7 +120,11 @@ class Zscore_calculator(QtGui.QMainWindow):
         
         fileMenuPat = mainMenu.addMenu('&Patient data')
         fileMenuPat.addAction(loadPatientDataButton)
-        fileMenuPat.addAction(loadPatientCompButton)
+        fileMenuPat.addAction(PatientCompButton)
+        fileMenuPat.addAction(PatientSaveButton)
+
+  
+ 
  
         
     def init_createFormGroupBox(self):
@@ -241,6 +249,14 @@ class Zscore_calculator(QtGui.QMainWindow):
             except Exception as e: print(e)
         else:
             print("no data")
+    
+    def open_saveZscores(self):
+        try:
+            filename_chart = QtGui.QFileDialog.getSaveFileName(self,'Save File', ' ','*.csv')
+            if filename_chart:
+                self.df.to_csv(filename_chart, sep = ',', encoding = "ISO-8859-1", index = False)
+        except:
+            print("copy error")
 
 
             
