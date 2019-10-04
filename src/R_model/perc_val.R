@@ -1,7 +1,10 @@
 # perc_val.R
 # Load packages
 library(gamlss)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0b046637ac932e7032c67a5729d9fbee0a1f6503
 
 # Fetch command line arguments
 myArgs <- commandArgs(trailingOnly = TRUE)

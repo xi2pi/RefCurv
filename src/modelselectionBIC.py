@@ -148,9 +148,10 @@ class TaskManager(QtCore.QObject):
 
     def __init__(self, parent=None):
         QtCore.QObject.__init__(self, parent)
-        self.command = 'Rscript'
         
         self.program_path = os.path.dirname(sys.argv[0])
+        self.command = self.program_path + '/Rscript'
+        
         self.BIC = []
         self.M = []
         self.S = []

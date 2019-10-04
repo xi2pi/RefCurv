@@ -2,13 +2,17 @@ Loading required package: splines
 Loading required package: gamlss.data
 Loading required package: gamlss.dist
 Loading required package: MASS
+<<<<<<< HEAD
 Loading required package: methods
+=======
+>>>>>>> 0b046637ac932e7032c67a5729d9fbee0a1f6503
 Loading required package: nlme
 Loading required package: parallel
  **********   GAMLSS Version 5.1-2  ********** 
 For more on GAMLSS look at http://www.gamlss.org/
 Type gamlssNews() to see new features/changes/bug fixes.
 
+<<<<<<< HEAD
 There were 41 warnings (use warnings() to see them)
 Warning message:
 In predict.gamlss(obj, what = "mu", newdata = newx, type = "response",  :
@@ -36,3 +40,7 @@ In predict.gamlss(object, newdata = newdata, what = "mu", type = type,  :
   There is a discrepancy  between the original and the re-fit 
  used to achieve 'safe' predictions 
  
+=======
+There were 47 warnings (use warnings() to see them)
+There were 18 warnings (use warnings() to see them)
+>>>>>>> 0b046637ac932e7032c67a5729d9fbee0a1f6503

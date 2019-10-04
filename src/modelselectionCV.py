@@ -21,7 +21,7 @@ class ModelSelectionCV(QtGui.QMainWindow):
         
         self.fileName = None
         
-        self.command = 'Rscript'
+        self.command = self.program_path + '/Rscript'
         
         self.setGeometry(50, 50, 500, 300)
         self.setupUI()
