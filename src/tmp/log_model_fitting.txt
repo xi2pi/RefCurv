@@ -9,7 +9,7 @@ Loading required package: parallel
 For more on GAMLSS look at http://www.gamlss.org/
 Type gamlssNews() to see new features/changes/bug fixes.
 
-There were 50 or more warnings (use warnings() to see the first 50)
+There were 41 warnings (use warnings() to see them)
 Warning message:
 In predict.gamlss(obj, what = "mu", newdata = newx, type = "response",  :
   There is a discrepancy  between the original and the re-fit 
