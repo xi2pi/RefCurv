@@ -24,6 +24,11 @@ RefCurv was used to fit a model to the data points and depict it in form of perc
 
 ![RefCurv](/docs/readme/refcurv_0_4_0.png)
 
+## Publications
+
+- [Winkler, C., Linden, K., Mayr, A., Schultz, T., Welchowski, T., Breuer, J., & Herberg, U. (2020). RefCurv: A software for the construction of pediatric reference curves. Software Impacts, 6, 100040.](https://www.sciencedirect.com/science/article/pii/S2665963820300312?via%3Dihub)
+
+
 ## Acknowledgements
 This study is funded by Fördergemeinschaft Deutsche Kinderherzzentren e.V.
 
